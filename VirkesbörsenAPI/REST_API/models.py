@@ -5,7 +5,7 @@ from django.contrib.postgres.fields import HStoreField, ArrayField
 
 class AuctionItem(models.Model):
     auctionId = models.IntegerField(primary_key=True, unique=True)
-    startBidingDate= models.DateField(help_text="format yyyy-MM-dd", null=True)
+    startBidingDate= models.DateField(help_text="format yyyy-MM-dd")
     endBidingDate = models.DateField(help_text="format yyyy-MM-dd")
     lat = models.FloatField(null=True)
     long = models.FloatField(null=True)
