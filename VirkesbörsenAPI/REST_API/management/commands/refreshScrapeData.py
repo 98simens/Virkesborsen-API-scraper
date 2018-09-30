@@ -1,0 +1,11 @@
+from django.core.management.base import BaseCommand
+from ._scrapeData import WebScraper
+from REST_API.models import AuctionItem
+
+class Command(BaseCommand):
+    help = 'Refresh scrape data in database'
+    def handle(self, *args, **kwargs):
+        scraper = WebScraper('https://www.virkesborsen.se', '/auctions/', '/login/', 'simonenstrom@hotmail.com', 'Nm5gNrNTHPkogB2amHUA')
+        auctionDataItems = scraper.getAuctionItems()
+        for auctionData in auctionDataItems:
+            AuctionItem.objects.update_or_create(auctionData, auctionId=auctionData['auctionId'])
